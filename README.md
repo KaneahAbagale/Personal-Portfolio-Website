@@ -14,5 +14,5 @@ fintech, cybersecurity, and cloud infrastructure.
 - Hosted on GitHub Pages
 
 ## Contact
-gertrude.kaneah.abagale@gmail.com
-www.linkedin.com/in/gertrude-abagale
+- gertrude.kaneah.abagale@gmail.com
+- www.linkedin.com/in/gertrude-abagale
