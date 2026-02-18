@@ -1,5 +1,5 @@
 # Gertrude Abagale — Portfolio Website
-Personal portfolio website—Cybersecurity | Solutions Engineer | Fintech | Cloud
+Portfolio website Cybersecurity | Solutions Engineer | Fintech | Cloud
 
 Personal portfolio website built with HTML, CSS, and JavaScript.
 
