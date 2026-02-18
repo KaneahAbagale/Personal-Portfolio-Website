@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gertrude Abagale — Solutions Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --border: #1e1e2e;
+    --cyan: #00f5ff;
+    --lime: #b8ff3a;
+    --pink: #ff3af5;
+    --orange: #ff7a3a;
+    --text: #e8e8f0;
+    --muted: #6b6b8a;
+    --font-display: 'Syne', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font-mono); overflow-x: hidden; cursor: none; }
+  .cursor { width: 12px; height: 12px; background: var(--cyan); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; mix-blend-mode: screen; }
+  .cursor-ring { width: 36px; height: 36px; border: 1.5px solid var(--cyan); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9998; opacity: 0.5; transition: width 0.2s, height 0.2s; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.4; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 3rem; backdrop-filter: blur(12px); background: rgba(10,10,15,0.7); border-bottom: 1px solid var(--border); }
+  .nav-logo { font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--cyan); letter-spacing: -0.02em; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--cyan); }
+  section { position: relative; z-index: 1; }
+
+  /* HERO */
+  #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 8rem 3rem 5rem; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+  .hero-bg .blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.18; animation: drift 12s ease-in-out infinite alternate; }
+  .blob-1 { width: 600px; height: 600px; background: var(--cyan); top: -200px; right: -100px; }
+  .blob-2 { width: 400px; height: 400px; background: var(--pink); bottom: -100px; left: -50px; animation-delay: -4s; }
+  .blob-3 { width: 300px; height: 300px; background: var(--lime); top: 40%; left: 40%; animation-delay: -8s; }
+  @keyframes drift { from { transform: translate(0,0) scale(1); } to { transform: translate(40px,30px) scale(1.08); } }
+  .hero-content { position: relative; z-index: 1; max-width: 950px; }
+  .hero-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cyan); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.6s 0.2s forwards; }
+  h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(3rem, 8vw, 7.5rem); line-height: 0.95; letter-spacing: -0.03em; opacity: 0; animation: fadeUp 0.7s 0.4s forwards; }
+  h1 .accent-cyan { color: var(--cyan); }
+  .hero-sub { margin-top: 2rem; font-size: 0.95rem; color: var(--muted); max-width: 560px; line-height: 1.8; opacity: 0; animation: fadeUp 0.7s 0.6s forwards; }
+  .hero-cta { margin-top: 3rem; display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.7s 0.8s forwards; }
+  .btn { display: inline-block; padding: 0.85rem 2rem; font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: all 0.2s; cursor: none; }
+  .btn-primary { background: var(--cyan); color: var(--bg); font-weight: 600; box-shadow: 0 0 20px rgba(0,245,255,0.3); }
+  .btn-primary:hover { background: #fff; box-shadow: 0 0 40px rgba(0,245,255,0.6); transform: translateY(-2px); }
+  .btn-outline { border: 1px solid var(--border); color: var(--muted); }
+  .btn-outline:hover { border-color: var(--cyan); color: var(--cyan); transform: translateY(-2px); }
+  .scroll-indicator { position: absolute; bottom: 2.5rem; right: 3rem; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: var(--muted); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0; animation: fadeUp 0.7s 1.2s forwards; }
+  .scroll-line { width: 1px; height: 60px; background: linear-gradient(to bottom, var(--cyan), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+  @keyframes scrollPulse { 0%,100% { transform: scaleY(1); opacity: 1; } 50% { transform: scaleY(0.5); opacity: 0.4; } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* SKILLS */
+  #skills { padding: 6rem 3rem; border-top: 1px solid var(--border); }
+  .section-header { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 3rem; }
+  .section-num { font-size: 0.7rem; color: var(--lime); letter-spacing: 0.2em; }
+  h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 4vw, 3.5rem); letter-spacing: -0.03em; line-height: 1; }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .skill-card { background: var(--surface); padding: 2rem; transition: background 0.2s; position: relative; overflow: hidden; }
+  .skill-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--accent, var(--cyan)); transition: height 0.3s ease; }
+  .skill-card:hover { background: #15151f; }
+  .skill-card:hover::before { height: 100%; }
+  .skill-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+  .skill-name { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.75rem; }
+  .tag { font-size: 0.65rem; padding: 0.25rem 0.6rem; border-radius: 1px; letter-spacing: 0.08em; border: 1px solid; }
+  .tag-cyan  { color: var(--cyan);   border-color: rgba(0,245,255,0.25);  background: rgba(0,245,255,0.05); }
+  .tag-lime  { color: var(--lime);   border-color: rgba(184,255,58,0.25); background: rgba(184,255,58,0.05); }
+  .tag-pink  { color: var(--pink);   border-color: rgba(255,58,245,0.25); background: rgba(255,58,245,0.05); }
+  .tag-orange{ color: var(--orange); border-color: rgba(255,122,58,0.25); background: rgba(255,122,58,0.05); }
+
+  /* EXPERIENCE */
+  #experience { padding: 6rem 3rem; border-top: 1px solid var(--border); }
+  .exp-item { display: grid; grid-template-columns: 200px 1fr; gap: 3rem; padding: 2.5rem 0; border-bottom: 1px solid var(--border); opacity: 1; transform: translateY(0); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .exp-item.visible { opacity: 1; transform: translateY(0); }
+  .exp-company { font-family: var(--font-display); font-weight: 700; font-size: 0.95rem; color: var(--cyan); margin-bottom: 0.3rem; }
+  .exp-period { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.08em; line-height: 1.6; }
+  .exp-location { font-size: 0.7rem; color: var(--muted); margin-top: 0.2rem; }
+  .exp-role { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.2rem, 2vw, 1.7rem); letter-spacing: -0.02em; margin-bottom: 1rem; }
+  .exp-highlights { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .exp-highlights li { font-size: 0.8rem; color: var(--muted); line-height: 1.7; padding-left: 1rem; position: relative; }
+  .exp-highlights li::before { content: '›'; position: absolute; left: 0; color: var(--lime); }
+
+  /* ABOUT */
+  #about { padding: 6rem 3rem; border-top: 1px solid var(--border); display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .about-text p { font-size: 0.88rem; color: var(--muted); line-height: 1.9; margin-bottom: 1.5rem; }
+  .about-text p strong { color: var(--text); font-weight: 600; }
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); align-self: start; }
+  .stat-box { background: var(--surface); padding: 2rem; }
+  .stat-value { font-family: var(--font-display); font-weight: 800; font-size: 3rem; line-height: 1; letter-spacing: -0.03em; }
+  .stat-label { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 0.5rem; }
+
+  /* CONTACT */
+  #contact { padding: 6rem 3rem; border-top: 1px solid var(--border); text-align: center; }
+  .contact-headline { font-family: var(--font-display); font-weight: 800; font-size: clamp(3rem, 7vw, 7rem); letter-spacing: -0.04em; line-height: 0.9; margin-bottom: 2rem; }
+  .contact-headline span { display: block; -webkit-text-stroke: 1px var(--cyan); color: transparent; }
+  .contact-links { display: flex; justify-content: center; gap: 2rem; margin-top: 3rem; flex-wrap: wrap; }
+  .contact-link { display: flex; align-items: center; gap: 0.5rem; color: var(--muted); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; cursor: none; }
+  .contact-link:hover { color: var(--cyan); }
+  footer { padding: 2rem 3rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  footer span { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; }
+  .status-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--lime); margin-right: 0.5rem; animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--cyan); }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    #hero, #skills, #experience, #about, #contact, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+    #about { grid-template-columns: 1fr; }
+    .exp-item { grid-template-columns: 1fr; gap: 1rem; }
+    .nav-links { gap: 1.2rem; }
+    .contact-links { flex-direction: column; align-items: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <div class="nav-logo">GERTRUDE.DEV</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-label">// Solutions Engineer · Fintech · Cybersecurity · Cloud</p>
+    <h1>Gertrude<br><span class="accent-cyan">Abagale</span></h1>
+    <p class="hero-sub">
+      Solutions Engineer with deep expertise in API-based payment integrations, enterprise solution design, and security operations. ISC2 certified. Based in Accra, Ghana.
+    </p>
+    <div class="hero-cta">
+      <a href="#experience" class="btn btn-primary">View Experience</a>
+      <a href="/cdn-cgi/l/email-protection#274042555355524342094c464942464f0946454640464b4267404a464e4b0944484a" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2>Skills & Tools</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card" style="--accent: var(--cyan)">
+      <div class="skill-icon">⚡</div>
+      <div class="skill-name">Engineering</div>
+      <p style="font-size:0.8rem;color:var(--muted);line-height:1.6">Full-stack development and API integration for enterprise platforms.</p>
+      <div class="skill-tags">
+        <span class="tag tag-cyan">Python</span>
+        <span class="tag tag-cyan">Flask</span>
+        <span class="tag tag-cyan">PHP / Laravel</span>
+        <span class="tag tag-cyan">JavaScript</span>
+        <span class="tag tag-cyan">RESTful API</span>
+        <span class="tag tag-cyan">HTML / CSS</span>
+      </div>
+    </div>
+    <div class="skill-card" style="--accent: var(--lime)">
+      <div class="skill-icon">☁️</div>
+      <div class="skill-name">Cloud & DevOps</div>
+      <p style="font-size:0.8rem;color:var(--muted);line-height:1.6">Infrastructure provisioning and cloud architecture across major platforms.</p>
+      <div class="skill-tags">
+        <span class="tag tag-lime">AWS</span>
+        <span class="tag tag-lime">Azure DevOps</span>
+        <span class="tag tag-lime">Azure Portal</span>
+        <span class="tag tag-lime">Terraform</span>
+        <span class="tag tag-lime">Linux</span>
+      </div>
+    </div>
+    <div class="skill-card" style="--accent: var(--pink)">
+      <div class="skill-icon">🔐</div>
+      <div class="skill-name">Security & SOC</div>
+      <p style="font-size:0.8rem;color:var(--muted);line-height:1.6">Incident detection, triage, and response across endpoint and cloud environments.</p>
+      <div class="skill-tags">
+        <span class="tag tag-pink">SentinelOne</span>
+        <span class="tag tag-pink">Splunk (SIEM)</span>
+        <span class="tag tag-pink">CheckPoint</span>
+        <span class="tag tag-pink">ISC2 Certified</span>
+      </div>
+    </div>
+    <div class="skill-card" style="--accent: var(--orange)">
+      <div class="skill-icon">🗄️</div>
+      <div class="skill-name">Data & Tooling</div>
+      <p style="font-size:0.8rem;color:var(--muted);line-height:1.6">Databases, project management, and developer workflows.</p>
+      <div class="skill-tags">
+        <span class="tag tag-orange">PostgreSQL</span>
+        <span class="tag tag-orange">MySQL</span>
+        <span class="tag tag-orange">GitHub</span>
+        <span class="tag tag-orange">JIRA</span>
+        <span class="tag tag-orange">Oracle VM</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2>Experience</h2>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-meta">
+      <div class="exp-company">Paystack</div>
+      <div class="exp-period">Jun 2022 – Jan 2026</div>
+      <div class="exp-location">Accra, Ghana</div>
+    </div>
+    <div>
+      <div class="exp-role">Solutions Engineer</div>
+      <ul class="exp-highlights">
+        <li>Led technical discovery and solution design for enterprise and fintech merchants, delivering secure, scalable API-based payment integrations that improved merchant operational efficiency by 30%.</li>
+        <li>Groomed APIs and led solution delivery with Affinity Ghana to design and launch Ghana's first Pay with Bank Transfer checkout option, enabling real-time bank transfers with full regulatory compliance.</li>
+        <li>Owned end-to-end integration delivery from pre-sales assessment and architecture design through implementation, testing, and go-live — aligned with Bank of Ghana regulations.</li>
+        <li>Contributed to 50+ enhancements across proprietary and open source integrations, strengthening platform reliability, auditability, and developer experience.</li>
+      </ul>
+      <div class="skill-tags" style="margin-top:1rem">
+        <span class="tag tag-cyan">API Integration</span>
+        <span class="tag tag-cyan">Fintech</span>
+        <span class="tag tag-cyan">Pre-Sales</span>
+        <span class="tag tag-cyan">Compliance</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-meta">
+      <div class="exp-company">Paystack</div>
+      <div class="exp-period">Oct 2024 – Jan 2026</div>
+      <div class="exp-location">Accra, Ghana</div>
+    </div>
+    <div>
+      <div class="exp-role">SOC Analyst</div>
+      <ul class="exp-highlights">
+        <li>Monitored security events across endpoint, cloud, and network environments using SentinelOne, Splunk, and AWS security services to detect, triage, and respond to incidents impacting payment infrastructure.</li>
+        <li>Conducted in-depth investigations through log analysis, traffic monitoring, and cross-source correlation — identifying indicators of compromise and supporting timely containment.</li>
+        <li>Documented incident investigations, root cause analyses, and lessons learned — contributing to improved SOC runbooks and incident response playbooks.</li>
+      </ul>
+      <div class="skill-tags" style="margin-top:1rem">
+        <span class="tag tag-pink">SentinelOne</span>
+        <span class="tag tag-pink">Splunk</span>
+        <span class="tag tag-pink">AWS Security</span>
+        <span class="tag tag-pink">Incident Response</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-meta">
+      <div class="exp-company">getINNOTIZED GmbH</div>
+      <div class="exp-period">Jan 2022 – Jun 2022</div>
+      <div class="exp-location">Accra, Ghana</div>
+    </div>
+    <div>
+      <div class="exp-role">Project Manager</div>
+      <ul class="exp-highlights">
+        <li>Led product discovery initiatives using user research and data-driven insights, growing platform applications from 300 to 1,000+.</li>
+        <li>Owned feature prioritization and product roadmap planning aligned with business, security, and compliance objectives.</li>
+      </ul>
+      <div class="skill-tags" style="margin-top:1rem">
+        <span class="tag tag-lime">Product Management</span>
+        <span class="tag tag-lime">Roadmap Planning</span>
+        <span class="tag tag-lime">Cross-functional</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-meta">
+      <div class="exp-company">getINNOTIZED GmbH</div>
+      <div class="exp-period">Aug 2021 – Jan 2022</div>
+      <div class="exp-location">Accra, Ghana</div>
+    </div>
+    <div>
+      <div class="exp-role">AWS Cloud Trainer</div>
+      <ul class="exp-highlights">
+        <li>Designed and delivered AWS cloud training programs covering core architecture, security best practices, and hands-on labs — achieving a 100% certification success rate for 50+ learners.</li>
+        <li>Led cloud workshops and mentorship initiatives, guiding learners through AWS certifications and real-world cloud infrastructure design.</li>
+      </ul>
+      <div class="skill-tags" style="margin-top:1rem">
+        <span class="tag tag-lime">AWS Training</span>
+        <span class="tag tag-lime">Mentorship</span>
+        <span class="tag tag-lime">Cloud Security</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-meta">
+      <div class="exp-company">iSmile Technologies</div>
+      <div class="exp-period">Jan 2022 – Apr 2022</div>
+      <div class="exp-location">Remote</div>
+    </div>
+    <div>
+      <div class="exp-role">Cloud Engineer Intern</div>
+      <ul class="exp-highlights">
+        <li>Managed cloud environments and implemented data replication and automation across AWS, GCP, and Azure DevOps, resulting in a 40% reduction in infrastructure costs and improved scalability.</li>
+      </ul>
+      <div class="skill-tags" style="margin-top:1rem">
+        <span class="tag tag-orange">AWS</span>
+        <span class="tag tag-orange">GCP</span>
+        <span class="tag tag-orange">Azure</span>
+        <span class="tag tag-orange">Automation</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-meta">
+      <div class="exp-company">Facio Innovations Tech</div>
+      <div class="exp-period">Mar 2021 – Aug 2021</div>
+      <div class="exp-location">Accra, Ghana</div>
+    </div>
+    <div>
+      <div class="exp-role">Software & Cloud Engineer Intern</div>
+      <ul class="exp-highlights">
+        <li>Enhanced a PHP web application, optimizing code and resolving bugs — growing the user base to 1,611 members.</li>
+        <li>Migrated and deployed a web application from a shared host to a LAMP stack on AWS, improving performance and scalability.</li>
+      </ul>
+      <div class="skill-tags" style="margin-top:1rem">
+        <span class="tag tag-orange">PHP</span>
+        <span class="tag tag-orange">AWS</span>
+        <span class="tag tag-orange">LAMP Stack</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2>Selected Projects</h2>
+  </div>
+  <div class="exp-list">
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-company" style="color:var(--lime)">Integrations</div>
+        <div class="exp-period">Paystack</div>
+        <div class="skill-tags" style="margin-top:0.75rem"><span class="tag tag-lime">PHP</span><span class="tag tag-lime">Tokenization</span><span class="tag tag-lime">Subscriptions</span></div>
+      </div>
+      <div>
+        <div class="exp-role" style="font-size:1.2rem">Zoho Recurring Payments</div>
+        <p style="font-size:0.82rem;color:var(--muted);line-height:1.8">Built a new workflow that allowed cards to be tokenized and saved to Paystack, enabling customers to use subscription-based card payments through Zoho. Completed end-to-end in staging environment.</p>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-company" style="color:var(--lime)">Open Source</div>
+        <div class="exp-period">Paystack</div>
+        <div class="skill-tags" style="margin-top:0.75rem"><span class="tag tag-lime">PHP</span><span class="tag tag-lime">Magento 2</span><span class="tag tag-lime">API v2</span></div>
+      </div>
+      <div>
+        <div class="exp-role" style="font-size:1.2rem">Magento 2 Plugin Revival</div>
+        <p style="font-size:0.82rem;color:var(--muted);line-height:1.8">After nearly 5 years of the Paystack Magento 2 plugin being unserviceable, rewrote outdated methods causing repeated failures, fixed a currency issue to ensure all Paystack-supported currencies were accessible, and upgraded checkout to the latest Paystack V2 — enabling customers to save card details to the Paystack vault.</p>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-company" style="color:var(--lime)">Open Source</div>
+        <div class="exp-period">Paystack</div>
+        <div class="skill-tags" style="margin-top:0.75rem"><span class="tag tag-lime">PHP</span><span class="tag tag-lime">WooCommerce</span><span class="tag tag-lime">BIN Discounts</span></div>
+      </div>
+      <div>
+        <div class="exp-role" style="font-size:1.2rem">WooCommerce BIN-Based Discounts</div>
+        <p style="font-size:0.82rem;color:var(--muted);line-height:1.8">Built a new feature for the Paystack WooCommerce plugin allowing merchants to configure custom discounts for customers based on card BIN. Also authored a detailed user guide so merchants could set up and manage discounts independently without needing team support.</p>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-company" style="color:var(--lime)">Open Source</div>
+        <div class="exp-period">Paystack</div>
+        <div class="skill-tags" style="margin-top:0.75rem"><span class="tag tag-lime">WordPress</span><span class="tag tag-lime">PHP</span><span class="tag tag-lime">Events Calendar</span></div>
+      </div>
+      <div>
+        <div class="exp-role" style="font-size:1.2rem">Events Calendar Plugin Fix</div>
+        <p style="font-size:0.82rem;color:var(--muted);line-height:1.8">The Paystack Events Calendar plugin had been crashing merchant WordPress sites for over 6 months — taking entire sites offline and requiring cPanel-level deletion to recover. Identified that Events Calendar's parent platform had silently changed how payment functions were called, updated the affected functions, and restored full plugin functionality.</p>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-company" style="color:var(--cyan)">Infrastructure</div>
+        <div class="exp-period">Paystack</div>
+        <div class="skill-tags" style="margin-top:0.75rem"><span class="tag tag-cyan">Datadog</span><span class="tag tag-cyan">Monitoring</span><span class="tag tag-cyan">Dashboards</span></div>
+      </div>
+      <div>
+        <div class="exp-role" style="font-size:1.2rem">Merchant Infrastructure Monitoring</div>
+        <p style="font-size:0.82rem;color:var(--muted);line-height:1.8">Defined key metrics through cross-functional consultation and built Datadog dashboards to track spikes and dips in merchant infrastructure. Enabled early detection and resolution of merchant-specific downtime before it impacted their customers.</p>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-company" style="color:var(--cyan)">Enterprise</div>
+        <div class="exp-period">Paystack</div>
+        <div class="skill-tags" style="margin-top:0.75rem"><span class="tag tag-cyan">Google Sheets</span><span class="tag tag-cyan">Scripts</span><span class="tag tag-cyan">Payments API</span></div>
+      </div>
+      <div>
+        <div class="exp-role" style="font-size:1.2rem">No-Code Dynamic Recurring Billing Tool</div>
+        <p style="font-size:0.82rem;color:var(--muted);line-height:1.8">Built a no-code recurring billing tool for a bank using Google Sheets, enabling them to create and charge customers dynamic amounts without engineering involvement. Automated the verification and charging process using Paystack API endpoints — merchants enter customer details once at first charge, then only input the dynamic amount for each subsequent billing cycle.</p>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-company" style="color:var(--orange)">QA & Compatibility</div>
+        <div class="exp-period">Paystack · Annual</div>
+        <div class="skill-tags" style="margin-top:0.75rem"><span class="tag tag-orange">WordPress</span><span class="tag tag-orange">PHP</span><span class="tag tag-orange">QA</span></div>
+      </div>
+      <div>
+        <div class="exp-role" style="font-size:1.2rem">WordPress Plugin Compatibility Reviews</div>
+        <p style="font-size:0.82rem;color:var(--muted);line-height:1.8">Annually led a team to test and review all Paystack WordPress plugins for compatibility with the latest WordPress and PHP releases. Covered plugins including MemberPress, Payment Forms, and others — ensuring merchants experienced no disruption following platform updates.</p>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-company" style="color:var(--pink)">Developer Relations</div>
+        <div class="exp-period">Paystack · Ghana</div>
+        <div class="skill-tags" style="margin-top:0.75rem"><span class="tag tag-pink">DevRel</span><span class="tag tag-pink">Events</span><span class="tag tag-pink">Community</span></div>
+      </div>
+      <div>
+        <div class="exp-role" style="font-size:1.2rem">Paystack Developer Roadshow — Ghana</div>
+        <p style="font-size:0.82rem;color:var(--muted);line-height:1.8">Organised Paystack's first-ever developer roadshow in Ghana, travelling across the Northern, Ashanti, and Greater Accra regions. Engaged with over 2,000 developers, raised awareness of Paystack products, and provided hands-on support to resolve developer integration issues across the country.</p>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-company" style="color:var(--pink)">Developer Relations</div>
+        <div class="exp-period">Paystack · Ghana</div>
+        <div class="skill-tags" style="margin-top:0.75rem"><span class="tag tag-pink">DevRel</span><span class="tag tag-pink">Community</span><span class="tag tag-pink">Adoption</span></div>
+      </div>
+      <div>
+        <div class="exp-role" style="font-size:1.2rem">Developer Mixer Series — Ghana</div>
+        <p style="font-size:0.82rem;color:var(--muted);line-height:1.8">Led end-to-end organisation of approximately 5 developer mixer events across Ghana, fostering direct engagement with the local tech ecosystem. These events helped Paystack better understand developer needs in Ghana and directly contributed to increased product adoption.</p>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-company" style="color:var(--orange)">Operations</div>
+        <div class="exp-period">Paystack</div>
+        <div class="skill-tags" style="margin-top:0.75rem"><span class="tag tag-orange">Reporting</span><span class="tag tag-orange">Ops</span><span class="tag tag-orange">Workflow</span></div>
+      </div>
+      <div>
+        <div class="exp-role" style="font-size:1.2rem">Solutions Engineering Reporting Workflow</div>
+        <p style="font-size:0.82rem;color:var(--muted);line-height:1.8">Designed and set up a new reporting workflow for the Solutions Engineering team to better track contributions to core Paystack business metrics and monitor the progress of special projects built for enterprise merchants.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="about">
+  <div>
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2>About</h2>
+    </div>
+    <div class="about-text">
+      <p>I'm <strong>Gertrude Abagale</strong> — a Solutions Engineer based in Accra, Ghana with a strong track record of delivering large-scale, secure payment integrations and leading technical pre-sales for fintech and enterprise clients at Paystack.</p>
+      <p>My work sits at the intersection of <strong>engineering, security, and business</strong>. I translate complex regulatory and technical requirements into scalable architectures, own integrations end-to-end, and ensure compliance with standards including Bank of Ghana regulations. I'm also an ISC2-certified security professional with hands-on SOC experience.</p>
+      <p>Currently pursuing an <strong>MSc in Cybersecurity & Digital Forensics</strong> at KNUST. AWS re/Start Graduate. I also write technical content on Medium.</p>
+      <a href="/cdn-cgi/l/email-protection#385f5d4a4c4a4d5c5d165359565d595016595a595f59545d785f55595154165b5755" class="btn btn-primary" style="margin-top:1rem; display:inline-block">Work With Me</a>
+    </div>
+  </div>
+  <div>
+    <div class="about-stats">
+      <div class="stat-box">
+        <div class="stat-value" style="color:var(--cyan)">4+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-value" style="color:var(--lime)">50+</div>
+        <div class="stat-label">Platform Enhancements</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-value" style="color:var(--pink)">50+</div>
+        <div class="stat-label">AWS Learners Certified</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-value" style="color:var(--orange)">30%</div>
+        <div class="stat-label">Efficiency Gains Delivered</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-headline">
+    Let's build<br>
+    <span>something</span>
+    great.
+  </div>
+  <p style="color:var(--muted);font-size:0.85rem;max-width:420px;margin:0 auto;line-height:1.8">
+    Open to solutions engineering roles, technical consulting, and fintech collaborations. I typically respond within 24 hours.
+  </p>
+  <a href="/cdn-cgi/l/email-protection#365153444244435253185d575853575e1857545751575a5376515b575f5a1855595b" class="btn btn-primary" style="margin-top:2.5rem;display:inline-block;font-size:0.82rem;padding:1rem 1.8rem;">
+    <span class="__cf_email__" data-cfemail="a6c1c3d4d2d4d3c2c388cdc7c8c3c7ce88c7c4c7c1c7cac3e6c1cbc7cfca88c5c9cb">[email&#160;protected]</span>
+  </a>
+  <div class="contact-links">
+    <a href="#" class="contact-link">⬡ GitHub</a>
+    <a href="#" class="contact-link">⬡ LinkedIn</a>
+    <a href="https://medium.com" target="_blank" class="contact-link">⬡ Medium</a>
+    <a href="tel:+233200578548" class="contact-link">⬡ +233 20 057 8548</a>
+  </div>
+</section>
+
+<footer>
+  <span><span class="status-dot"></span>Open to new opportunities</span>
+  <span>© 2025 Gertrude Abagale</span>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const cursor = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursorRing');
+  let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    cursor.style.transform = `translate(${mouseX - 6}px, ${mouseY - 6}px)`;
+  });
+
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+    cursorRing.style.transform = `translate(${ringX - 18}px, ${ringY - 18}px)`;
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button, .skill-card').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursorRing.style.width = '60px'; cursorRing.style.height = '60px'; });
+    el.addEventListener('mouseleave', () => { cursorRing.style.width = '36px'; cursorRing.style.height = '36px'; });
+  });
+
+
+  // Scroll-triggered fade-ins for skill cards and stat boxes
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.05 });
+
+  document.querySelectorAll('.skill-card, .stat-box').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+
+</script>
+</body>
+</html>
