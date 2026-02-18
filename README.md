@@ -16,3 +16,4 @@ fintech, cybersecurity, and cloud infrastructure.
 ## Contact
 - gertrude.kaneah.abagale@gmail.com
 - www.linkedin.com/in/gertrude-abagale
+- https://medium.com/@gertrude.kaneah.abagale
