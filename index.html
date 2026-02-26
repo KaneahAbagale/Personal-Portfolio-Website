@@ -570,7 +570,7 @@
       <p>I'm <strong>Gertrude Abagale</strong> — a Solutions Engineer based in Accra, Ghana with a strong track record of delivering large-scale, secure payment integrations and leading technical pre-sales for fintech and enterprise clients at Paystack.</p>
       <p>My work sits at the intersection of <strong>engineering, security, and business</strong>. I translate complex regulatory and technical requirements into scalable architectures, own integrations end-to-end, and ensure compliance with standards including Bank of Ghana regulations. I'm also an ISC2-certified security professional with hands-on SOC experience.</p>
       <p>Currently pursuing an <strong>MSc in Cybersecurity & Digital Forensics</strong> at KNUST. AWS re/Start Graduate. I also write technical content on Medium.</p>
-      <a href="#contact" class="btn btn-primary" style="margin-top:1rem; display:inline-block">Work With Me</a>
+
     </div>
   </div>
   <div>
@@ -608,7 +608,7 @@
     <a href="https://github.com/KaneahAbagale" target="_blank" class="contact-link">⬡ GitHub</a>
     <a href="https://www.linkedin.com/in/gertrude-abagale/" target="_blank" class="contact-link">⬡ LinkedIn</a>
     <a href="https://medium.com/@gertrude.kaneah.abagale" target="_blank" class="contact-link">⬡ Medium</a>
-    <a href="/cdn-cgi/l/email-protection#294e4c5b5d5b5c4d4c074248474c484107484b484e48454c694e44484045074a4644" class="contact-link">⬡ <span class="__cf_email__" data-cfemail="95f2f0e7e1e7e0f1f0bbfef4fbf0f4fdbbf4f7f4f2f4f9f0d5f2f8f4fcf9bbf6faf8">[email&#160;protected]</span></a>
+    <a href="mailto:gertrude.kaneah.abagale@gmail.com" class="contact-link">⬡ gertrude.kaneah.abagale@gmail.com</a>
   </div>
 </section>
 
@@ -617,7 +617,7 @@
   <span>© 2025 Gertrude Abagale</span>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   const cursor = document.getElementById('cursor');
   const cursorRing = document.getElementById('cursorRing');
   let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
@@ -641,4 +641,24 @@
   });
 
 
-  // Scroll-triggered fade-ins for skill cards and 
+
+  // Scroll-triggered fade-ins for skill cards and stat boxes
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.05 });
+
+  document.querySelectorAll('.skill-card, .stat-box').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+
+</script>
+</body>
+</html>
