@@ -1,7 +1,7 @@
 # Gertrude Abagale — Portfolio Website
 Portfolio website Cybersecurity | Solutions Engineer | Fintech | Cloud
 
-Personal portfolio website built with HTML, CSS, and JavaScript.
+Personal portfolio website built with HTML.
 
 🌐 Live site: https://KaneahAbagale.github.io/Personal-Portfolio-Website
 
@@ -10,7 +10,7 @@ Solutions Engineer with experience in API-based payment integrations,
 fintech, cybersecurity, and cloud infrastructure.
 
 ## Tech
-- HTML/CSS/JavaScript 
+- HTML 
 - Hosted on GitHub Pages
 
 ## Contact
